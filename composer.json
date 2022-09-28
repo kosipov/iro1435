@@ -1,0 +1,19 @@
+{
+    "name": "kosipov/iro1435",
+    "autoload": {
+        "psr-4": {
+            "Kosipov\\Iro1435\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kosipov",
+            "email": "mail@kosipov.ru"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "^2.13",
+        "symfony/cache": "^5.4",
+        "doctrine/annotations": "^1.13"
+    }
+}
