@@ -11,6 +11,42 @@ class Request
         $this->bootstrapSelf();
     }
 
+    /**
+     * @throws Exception
+     */
+    public function getBody()
+    {
+        if ($this->requestMethod === 'GET') {
+            return;
+        }
+
+        if ($this->requestMethod === 'POST') {
+            $body = [];
+
+            foreach ($_POST as $key => $value) {
+                $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+
+            return $body;
+        }
+
+        throw new Exception();
+    }
+
+    public function getQuery()
+    {
+        if ($this->requestMethod !== 'GET') {
+            return;
+        }
+
+        $query = [];
+        foreach ($_GET as $key => $value) {
+            $query[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+
+        return $query;
+    }
+
     private function bootstrapSelf()
     {
         foreach ($_SERVER as $key => $value) {
@@ -29,27 +65,5 @@ class Request
         }
 
         return $result;
-    }
-
-    /**
-     * @throws Exception
-     */
-    private function getBody()
-    {
-        if ($this->requestMethod === 'GET') {
-            return;
-        }
-
-        if ($this->requestMethod === 'POST') {
-            $body = [];
-
-            foreach ($_POST as $key => $value) {
-                $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
-            }
-
-            return $body;
-        }
-
-        throw new Exception();
     }
 }

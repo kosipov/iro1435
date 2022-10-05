@@ -13,6 +13,7 @@ $router->get('/users', fn() => $userController->getAllUsers());
 $router->get('/users/get', fn(\Kosipov\Iro1435\Request $request) => $userController->getUser($request));
 
 
+
 /*$userController = new \Kosipov\Iro1435\Controllers\UserController($conn);*/
 
 /*

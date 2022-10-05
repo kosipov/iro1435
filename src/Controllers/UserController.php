@@ -42,18 +42,14 @@ HTML;
 
     public function getUser(Request $request)
     {
-        var_dump($request);
-        /*if (!$id) {
-            return json_encode(['message' => 'User not found']);
-        }*/
+        $user = $this->userRepository->find($request->getQuery()['id']);
 
-        $user = $this->userRepository->find(1);
+        return <<<HTML
+<table>
+<tr>All users</tr>
+<tr><td>{$user->getId()}</td><td>{$user->getId()}</td></tr>
+</table>
 
-        return json_encode(
-            [
-                'id' => $user->getId(),
-                'name' => $user->getName()
-            ]
-        );
+HTML;
     }
 }
